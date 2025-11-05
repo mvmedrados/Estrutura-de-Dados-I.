@@ -1,0 +1,48 @@
+/**
+ * @file  questao04_11.c
+ * @author  @mvmedrados
+ * @date  2025-11-04
+ * @brief
+ **/
+
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
+
+		#define simulacoes 100000
+        int main() {
+			srand(time(NULL));
+			int N, cont = 0;
+			do
+			{
+				// FAZENDO A 100000 SIMULAÇÕES
+				printf ("\nDigite um valor para N:\n");
+				scanf (" %d", &N);
+				
+				if (N == 0) break;
+				int sorteios[N], flag = 1;
+				
+				for (int s = 0; s < simulacoes; s++){
+					for (int i = 0; i < N; i++){
+						sorteios[i]= 1+ rand()%(2*N);
+						printf ("[%d] ", sorteios[i]);
+					}
+					
+					for (int i = 0; i < N; i++){
+						for (int j = i - 1 ; i < N; i--){
+							if (sorteios[i] == sorteios[j]){
+								flag = 0;
+								break;
+							} 
+						}	
+					}
+					if (!flag) break; 
+					if (flag) cont ++;
+				}
+				
+			} while (1);
+			
+			printf("A porcentagem de conjuntos de números não repetitivos foi de : %f %%", (float)(cont/100)* 100);
+        return 0;
+        }
