@@ -13,36 +13,44 @@
 		#define simulacoes 100000
         int main() {
 			srand(time(NULL));
-			int N, cont = 0;
+			int N = 0;
+			
 			do
 			{
+				N++;
+				int  cont = 0;
 				// FAZENDO A 100000 SIMULAÇÕES
-				printf ("\nDigite um valor para N:\n");
-				scanf (" %d", &N);
 				
 				if (N == 0) break;
-				int sorteios[N], flag = 1;
+				int sorteios[N];
 				
 				for (int s = 0; s < simulacoes; s++){
+					int flag = 1;
 					for (int i = 0; i < N; i++){
-						sorteios[i]= 1+ rand()%(2*N);
-						printf ("[%d] ", sorteios[i]);
+						sorteios[i]= rand()%(2*N + 1);
 					}
 					
 					for (int i = 0; i < N; i++){
-						for (int j = i - 1 ; i < N; i--){
-							if (sorteios[i] == sorteios[j]){
+						for (int j = i - 1; j >= 0; j--){
+							if (sorteios[i] == sorteios[j] && j > -1){
 								flag = 0;
 								break;
 							} 
 						}	
+						if (!flag) {
+						cont++;
+						break; 
+						}
 					}
-					if (!flag) break; 
-					if (flag) cont ++;
 				}
-				
+				float perc = (((float)simulacoes - cont) * 100) / simulacoes;
+				printf("A porcentagem de conjuntos de números não repetitivos foi de : %f%%", perc);
+				printf("\n\n");
+				if(perc == 0.0){ 
+					printf("A probabilidade de 0%% é com n = %d", N);
+					break;
+				}
 			} while (1);
 			
-			printf("A porcentagem de conjuntos de números não repetitivos foi de : %f %%", (float)(cont/100)* 100);
         return 0;
         }
