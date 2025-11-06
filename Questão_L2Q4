@@ -1,0 +1,101 @@
+/**
+ * @file  L2Q4.c
+ * @author  @mvmedrados
+ * @date  2025-11-05
+ * @brief
+ * Faça um programa C para ler do usuário dois valores inteiros X e Y. 
+ * Alimente dois vetores de tamanhos X e Y com números inteiros aleatórios, não repetitivos, 
+ * sorteados no intervalo entre 0 e X+Y (inclusive). Faça a impressão das seguintes informações:
+	a) Vetores X e Y;
+	b) Todos os números exclusivos do vetor X;
+	c) Todos os números exclusivos do vetor Y;
+	d) Os números existentes nos dois vetores
+ **/
+
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
+
+
+        int main() {
+			srand(time(NULL));
+			int x, y;
+			
+			// LENDO DOIS VALORES
+			printf ("Digite o valor de X :\n");
+			scanf (" %d", &x);
+			printf ("Digite o valor de Y :\n");
+			scanf (" %d", &y);
+			system("clear");
+		
+			// ALIMENTANDO COM NÚMEROS NÃO REPETITIVOS
+			int vetx[x], vety[y];
+			for (int i = 0; i < x; i++) {
+				int flag;
+				do {
+					flag = 0;
+					vetx[i] = rand() % (x + y + 1);
+					for (int j = 0; j < i; j++) {
+						if (vetx[j] == vetx[i]) {
+						flag = 1;
+						break;
+						}
+					}
+				} while (flag);
+			}
+			for (int i = 0; i < y; i++) {
+				int flag;
+				do {
+					flag = 0;
+					vety[i] = rand() % (x + y + 1);
+					for (int j = 0; j < i; j++) {
+						if (vety[j] == vety[i]) {
+						flag = 1;
+						break;
+						}
+					}
+				} while (flag);
+			}
+			// IMPRIMINDO VETOR X E Y 
+			printf ("Os valores sortedos do vetor X foram:\n");
+			for (int i = 0; i < x; i++){
+				printf("[%d] ", vetx[i]);
+			}
+			printf ("\n\nOs valores sortedos do vetor Y foram:\n");
+			for (int i = 0; i < y; i++){
+				printf("[%d] ", vety[i]);
+			}
+			
+			printf ("\n\n\n");
+			
+			// VALORES EXCLUSIVOS DE X
+			printf("\n\nValores EXCLUSIVOS de X : ");
+			for (int i = 0; i < x; i++){
+				int flag = 0;
+				for (int j = 0; j < y ; j++){
+					if (vetx[i] == vety[j]) flag = 1;
+				}
+				if (!flag) printf ("[%d] ", vetx[i]);
+			}
+			
+			// VALORES EXCLUSIVOS DE Y 
+			printf("\n\nValores EXCLUSIVOS de Y : ");
+			for (int i = 0; i < y; i++){
+				int flag = 0;
+				for (int j = 0; j < x ; j++){
+					if (vety[i] == vetx[j]) flag = 1;
+				}
+					if (!flag) printf ("[%d] ", vety[i]);
+			}
+			
+			// VALORES CONTIDOS EM X E Y 
+			printf("\n\nValores CONTIDOS em X e Y : ");
+			for (int i = 0; i < x; i++){
+				for (int j = 0; j < y ; j++){
+					if (vetx[i] == vety[j]) 
+					printf ("[%d] ", vetx[i]);
+				}	
+			}
+        return 0;
+        }
