@@ -32,7 +32,7 @@
 			printf ("\n\nNúmeros de citações realizadas:\n");
 			for (int i = 0; i < n; i++)
 			{
-				cita[i] = 2;
+				cita[i] = rand()% n + 1;
 				printf ("<%d> ", cita[i]);
 			}
 			printf("\n\n");
