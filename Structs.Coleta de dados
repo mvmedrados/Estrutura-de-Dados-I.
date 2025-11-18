@@ -39,9 +39,10 @@
 			// FINALIZAR QUANDO DIGITAR "EXIT"
 				if (strcmp(p[i].nome, "exit") == 0){
 					flag = 1;
+					system("clear");
 					break;
 					} 
-				if (flag) cont++;
+				if (!flag) cont++;
 				
 				printf("Digite seu cpf:\n");
 				scanf (" %s", p[i].cpf);
